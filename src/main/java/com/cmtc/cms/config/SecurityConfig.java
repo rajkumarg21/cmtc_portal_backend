@@ -42,15 +42,6 @@ public class SecurityConfig {
 			"/pages/**",
 			"/gallery/**",
 			"/books/**",
-			"/authors/**",
-			"/reader/**",
-			"/contact/**",
-			"/feedback/**",
-			"/rti/**",
-			"/gradationlist/**",
-			
-			"/payment/**",
-			"/summary/**",
 			"/login/**",
 			"/signup/**",
 			"/forgot-password/**",
@@ -89,51 +80,24 @@ public class SecurityConfig {
                     //------Public (rojgar aur nirman)
                     .requestMatchers("/api/rojgar-nirman/public/**").permitAll()
                     //------Admin Area (based on roles) (rojgar aur nirman)
-                    .requestMatchers("/api/rojgar-nirman/admin/fetch/all").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rojgar-nirman/admin/fetch/**").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-
-                    .requestMatchers("/api/rojgar-nirman/admin/create").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rojgar-nirman/admin/edit/**").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rojgar-nirman/admin/approve/**").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/subscriptions/user-trial-plan/**").authenticated()
             	    // Public API access (endpoints that do NOT require authentication)
             	    .requestMatchers(
-            	    		"api/admin/users/countries/**",
-                           "api/admin/users/states/**",
-                           "api/admin/users/user/**",
-                           "api/admin/users/districts/**",
-                           "api/admin/users/address/**",
+            	    	 "api/admin/users/user/**", 
             	        "/api/auth/**",// Login, forgot password, reset password
             	        "/auth/public/**",// normal registration
             	        "/api/public/**", // General public APIs
-            	        "/api/search/**",
             	        "/api/news/public/**",
-            	        "/api/film/public/**",
-            	        "/api/project/public/**",
-            	        "/api/event/public/**",
             	        "/api/circulars/public/**",
-                        "/api/static-pages/public/**",
-                        "/api/static-pages/rojgar-nirman/public/**",
+            	        "/api/tenders/public/**",
                         "/api/gallery/public/**",
                         "/api/gallery/categories", // <--- ADDED THIS LINE
-                        "/api/books/public/**",
-                        "/api/books/files/**",
-                        "/api/authors/public/**",
                         "/api/contact/submit",
-                        "/api/feedback/submit",
-                        "/api/rti/submit",
-                        "/api/rti/public/status/**", // Keep this permitAll, regex will handle path variable
                         "/files/**", // For serving uploaded files
                         "/api/v1/menu/**",
                         "/api/rojgar-nirman/public/**",
                         "api/marquee-item/public/fetch/all",
                         "/api/carousel/public/**",
-                        "/api/advertisementDetails/**",
-						"api/film/public/**",
-						"api/project/public/**",
-						"api/printingSection/public/**",
-						"api/event/public/**",
-							"/actuator/**"
+                        "/actuator/**"
 
             	    ).permitAll()
             	    
@@ -155,19 +119,10 @@ public class SecurityConfig {
                     .requestMatchers("/api/analytics/admin/dashboard-stats").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN", "ROLE_EDITOR")
                     .requestMatchers("/api/news/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
                     .requestMatchers("/api/circulars/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/static-pages/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/gallery/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/books/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/authors/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
+                    .requestMatchers("/api/tender/admin/**").hasAnyAuthority("ROLE_EDITOR", "ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
                     .requestMatchers("/api/users/admin/**").hasAnyAuthority("ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rojgar-nirman/admin/**").hasAnyAuthority("ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/contact-messages/admin/**").hasAnyAuthority("ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/feedback/admin/**").hasAnyAuthority("ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti/admin/**").hasAnyAuthority("ROLE_PORTAL_ADMIN")
                     .requestMatchers("/api/approval/admin/**").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN") 
                    
-
-                    
 
                     // ----------- Admin Area for Marquee Item (based on roles) -----------
                     .requestMatchers("/api/marquee-item/admin/fetch/all").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
@@ -176,18 +131,7 @@ public class SecurityConfig {
                     .requestMatchers("/api/marquee-item/admin/edit/**").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
                     .requestMatchers("/api/marquee-item/admin/approve/**").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
                     .requestMatchers("/api/marquee-item/admin/delete/**").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    
-                    // ----------- Admin Area for RTI Document (based on roles) -----------
-                    .requestMatchers("/api/rti-document/admin/fetch/{id}").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti-document/admin/fetch/all").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti-document/admin/upload").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti-document/admin/edit/{id}").hasAnyAuthority("ROLE_EDITOR","ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti-document/admin/approve/{id}").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti-document/admin/delete/{id}").hasAnyAuthority("ROLE_PORTAL_ADMIN")
-                    .requestMatchers("/api/rti-document/admin/toggle-visibility/{id}").hasAnyAuthority("ROLE_PUBLISHER", "ROLE_PORTAL_ADMIN")
-                   
- 
-
+                 
                     // All other requests (that haven't been matched above) require authentication
             	    .anyRequest().authenticated()
             	);

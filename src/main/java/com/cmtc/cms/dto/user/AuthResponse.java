@@ -32,10 +32,4 @@ public class AuthResponse {
 		this.role = role;
 	}
     
-	public AuthResponse(String jwtToken, String username, String role) {
-		super();
-		this.jwtToken = jwtToken;
-		this.username = username;
-		this.role = role;
-	}
 }
